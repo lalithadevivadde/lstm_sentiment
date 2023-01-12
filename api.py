@@ -9,7 +9,7 @@ from preprocessing.text_preprocessing import TextPreprocessor
 from tensorflow.keras import models
 import os
 from tensorflow.keras.preprocessing.sequence import pad_sequences
-
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 app = FastAPI()
 with open(os.path.join(".", "models", "preprocessors.bin"), "rb") as f:
