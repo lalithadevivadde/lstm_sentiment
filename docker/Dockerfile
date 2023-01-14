@@ -4,5 +4,5 @@ COPY . .
 COPY ./docker/api_requirements.txt ./requirements.txt
 RUN rm -r ./docker
 RUN pip install --no-cache-dir -r requirements.txt
-CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "5001"]
-EXPOSE 5001
+CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=5002"]
+EXPOSE 5002
