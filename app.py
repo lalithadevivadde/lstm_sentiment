@@ -17,10 +17,6 @@ app = Flask(__name__, template_folder='templates', static_folder='static')
 CORS(app)
 
 
-with open(os.path.join(".", "models", "preprocessors.bin"), "rb") as f:
-    tokenizer, maxlen, padding, truncating = cloudpickle.load(f)
-
-model = models.load_model(os.path.join(".", "models", "review_sentiment_model.h5"), compile=False)
 
 
 
@@ -51,6 +47,11 @@ def form_prediction():
         Processes the API request and returns a prediction
         """
         try:
+            with open(os.path.join(".", "models", "preprocessors.bin"), "rb") as f:
+                tokenizer, maxlen, padding, truncating = cloudpickle.load(f)
+
+            model = models.load_model(os.path.join(".", "models", "review_sentiment_model.h5"), compile=False)
+
             txt_ser = pd.Series(txt)  # converting api data dict to df
             tp = TextPreprocessor()
             preprocessed_str = tp.preprocess(txt_ser, dataset="test")
